@@ -11,13 +11,19 @@ public class Program {
 
         int[] a = Tabell.randPerm(20); // tilfeldig permutasjon av 1 . . 20
         int[] c = {1,20,10};
-        int[] b = Tabell.nestMaks(c);  // metoden returnerer en tabell
+
+        int[] b = Tabell.nestMaksBakerst(c);  // metoden returnerer en tabell
 
         int m = b[0], nm = b[1];       // m for maks, nm for nestmaks
 
+        System.out.println("C: ");
         Tabell.skrivln(c);        // se Oppgave 5 i Avsnitt 1.2.2
+        System.out.println();
         System.out.print("Størst(" + c[m] + ") har posisjon " + m);
         System.out.println(", nest størst(" + c[nm] + ") har posisjon " + nm);
+
+        System.out.println("SORTING");
+        Tabell.sortering(c);
 
     }
 }

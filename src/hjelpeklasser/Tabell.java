@@ -328,4 +328,96 @@ public class Tabell {
 
     } // nestMaks
 
+    public static int[] nestMaksForrest(int[] a) {
+        int n = a.length;
+
+        if (n < 2)
+            throw new NoSuchElementException("Lengde må være > 2");
+
+        int m = maks(a);
+
+        bytt(a, 0, m);
+
+        for (int b : a
+                ) {
+            System.out.println(b);
+        }
+
+        //funnet maks og satt den som første element
+        int nm = 0; //holder på nest maks
+
+
+        nm = maks(a, 1, m);
+
+        if(nm == m){
+            nm = 0;
+        }
+
+        bytt(a,m,0);
+
+        return new int[]{m, nm};
+    }
+
+    public static int[] nestMaksBakerst(int[] a) {
+        int n = a.length;
+
+        if(n < 2)
+            throw new NoSuchElementException("Legnde må veære >2");
+
+        int m = maks(a);
+
+        bytt(a,m,n-1);
+
+        System.out.println("Byttet plass");
+        for (int hh: a
+             ) {
+            System.out.println(hh);
+        }
+
+        int nm = maks(a,0, n-1);
+
+        bytt(a,n-1,m);
+
+        if(nm == m){
+            nm = a.length-1;
+        }
+
+        System.out.println("Tilbake vanlig");
+        for (int hh: a
+                ) {
+            System.out.println(hh);
+        }
+
+        return new int[] {m,nm};
+    }
+
+    public static void sortering(int[] a){
+        if(a.length < 2){
+            throw new NoSuchElementException("For kort");
+        }
+
+        //4 2 9
+
+        int[] sort = new int[a.length];
+
+        int m = maks(a);
+
+        bytt(a,m,a.length-1);
+
+        int n = a.length-1;
+
+        while(n>0){
+
+            int nm = maks(a,0, n-1);
+
+            sort[n] = nm;
+            n--;
+        }
+
+        skrivln(sort);
+
+    }
+
+
+
 }
