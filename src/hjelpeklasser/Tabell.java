@@ -368,11 +368,6 @@ public class Tabell {
 
         bytt(a,m,n-1);
 
-        System.out.println("Byttet plass");
-        for (int hh: a
-             ) {
-            System.out.println(hh);
-        }
 
         int nm = maks(a,0, n-1);
 
@@ -382,40 +377,18 @@ public class Tabell {
             nm = a.length-1;
         }
 
-        System.out.println("Tilbake vanlig");
-        for (int hh: a
-                ) {
-            System.out.println(hh);
-        }
 
         return new int[] {m,nm};
     }
 
-    public static void sortering(int[] a){
-        if(a.length < 2){
-            throw new NoSuchElementException("For kort");
+    //fasit
+    public static void sortering(int[] a)
+    {
+        for (int i = a.length; i > 1; i--)
+        {
+            int m = Tabell.maks(a,0,i);
+            Tabell.bytt(a,i-1,m);
         }
-
-        //4 2 9
-
-        int[] sort = new int[a.length];
-
-        int m = maks(a);
-
-        bytt(a,m,a.length-1);
-
-        int n = a.length-1;
-
-        while(n>0){
-
-            int nm = maks(a,0, n-1);
-
-            sort[n] = nm;
-            n--;
-        }
-
-        skrivln(sort);
-
     }
 
 

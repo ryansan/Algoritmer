@@ -16,12 +16,9 @@ public class Program {
 
         int m = b[0], nm = b[1];       // m for maks, nm for nestmaks
 
-        System.out.println("C: ");
-        Tabell.skrivln(c);        // se Oppgave 5 i Avsnitt 1.2.2
-        System.out.println();
-        System.out.print("Størst(" + c[m] + ") har posisjon " + m);
-        System.out.println(", nest størst(" + c[nm] + ") har posisjon " + nm);
 
+        int maks = Tabell.maks(c,0,c.length-1);
+        System.out.println(c[maks]);
         System.out.println("SORTING");
         Tabell.sortering(c);
 
