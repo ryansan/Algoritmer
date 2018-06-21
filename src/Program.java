@@ -22,5 +22,8 @@ public class Program {
         System.out.println("SORTING");
         Tabell.sortering(c);
 
+        int[] l = Tabell.nestMin(c);
+        Tabell.skrivln(l);
+
     }
 }

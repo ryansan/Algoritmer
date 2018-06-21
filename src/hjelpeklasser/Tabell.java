@@ -298,34 +298,49 @@ public class Tabell {
 
     //Oppgaver 1.2.4
 
-    public static int[] nestMaks(int[] a)  // legges i class Tabell
+    public static int[] nestMaks(int[] a)
     {
-        int n = a.length;   // tabellens lengde
+        int n = a.length;  // tabellens lengde
 
-        if (n < 2) throw   // må ha minst to verdier!
-                new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+        // må ha minst to verdier i tabellen
+        if (a.length < 2) throw new
+                IllegalArgumentException("a.length(" + a.length + ") < 2!");
 
-        int m = maks(a);  // m er posisjonen til tabellens største verdi
+        int sist = a.length - 1; // siste posisjon i tabellen
 
-        int nm;     // nm skal inneholde posisjonen til nest største verdi
+        // starter med å se på første og siste verdi i tabellen
+        int m = 0; // første posisjon
+        int nm = sist; // siste posisjon
 
-        if (m == 0)                            // den største ligger først
+        // m skal være sist hvis a[sist] er større enn a[0]
+        if (a[sist] > a[0]) { m = sist; nm = 0; }
+
+        int maksverdi = a[m];  // største verdi
+        int nestmaksverdi = a[nm];  // nest største verdi
+
+        int temp = a[sist];            // tar vare på siste verdi
+        a[sist] = 0x7fffffff;          // legger tallet 2147483647 sist
+
+        for (int i = 1; ; i++)
         {
-            nm = maks(a,1,n);                    // leter i a[1:n>
-        }
-        else if (m == n-1)                     // den største ligger bakerst
-        {
-            nm = maks(a,0,n-1);                  // leter i a[0:n-1>
-        }
-        else
-        {
-            int mv = maks(a,0,m);                // leter i a[0:m>
-            int mh = maks(a,m+1,n);              // leter i a[m+1:n>
-            nm = a[mh] > a[mv] ? mh : mv;        // hvem er størst?
-        }
-
-        return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
-
+            if (a[i] >= nestmaksverdi)
+            {
+                if (i == sist)
+                {
+                    a[sist] = temp; int[] b = {m,nm}; return b;
+                }
+                else if (a[i] > maksverdi)
+                {
+                    nm = m; nestmaksverdi = maksverdi;
+                    m = i; maksverdi = a[m];
+                }
+                else
+                {
+                    nm = i;
+                    nestmaksverdi = a[nm]; // ny nest størst
+                }
+            }
+        } // for
     } // nestMaks
 
     public static int[] nestMaksForrest(int[] a) {
@@ -390,6 +405,51 @@ public class Tabell {
             Tabell.bytt(a,i-1,m);
         }
     }
+
+    public static int[] nestMin(int[] a)
+    {
+        int n = a.length;  // tabellens lengde
+
+        // må ha minst to verdier i tabellen
+        if (a.length < 2) throw new
+                IllegalArgumentException("a.length(" + a.length + ") < 2!");
+
+        int sist = a.length - 1; // siste posisjon i tabellen
+
+        // starter med å se på første og siste verdi i tabellen
+        int m = 0; // første posisjon
+        int nm = sist; // siste posisjon
+
+        // m skal være sist hvis a[sist] er større enn a[0]
+        if (a[sist] < a[0]) { m = sist; nm = 0; }
+
+        int minverdi = a[m];  // største verdi
+        int nestminverdi = a[nm];  // nest største verdi
+
+        int temp = a[sist];            // tar vare på siste verdi
+        a[sist] = 0x7fffffff;          // legger tallet 2147483647 sist
+
+        for (int i = 1; ; i++)
+        {
+            if (a[i] <= nestminverdi)
+            {
+                if (i == sist)
+                {
+                    a[sist] = temp; int[] b = {m,nm}; return b;
+                }
+                else if (a[i] < minverdi)
+                {
+                    nm = m; nestminverdi = minverdi;
+                    m = i; minverdi = a[m];
+                }
+                else
+                {
+                    nm = i;
+                    nestminverdi = a[nm]; // ny nest størst
+                }
+            }
+        } // for
+    } // nestMaks
 
 
 
